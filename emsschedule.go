@@ -7,7 +7,7 @@ import (
 	"regexp"
 	"time"
 
-	"github.com/byuoitav/av-api/packages/soap"
+	"github.com/byuoitav/goap"
 )
 
 // IsRoomAvailable returns a bool representing whether or not a room is available according to the EMS scheduling system
