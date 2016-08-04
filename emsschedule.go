@@ -31,18 +31,18 @@ func IsRoomAvailable(building string, room string) (bool, error) {
 		EndTime:     endTime,
 	}
 
-	encodedRequest, err := soap.Encode(&request)
+	encodedRequest, err := goap.Encode(&request)
 	if err != nil {
 		return false, err
 	}
 
-	response, err := soap.Request("https://emsweb.byu.edu/EMSAPI/Service.asmx", encodedRequest)
+	response, err := goap.Request("https://emsweb.byu.edu/EMSAPI/Service.asmx", encodedRequest)
 	if err != nil {
 		return false, err
 	}
 
 	availability := RoomAvailabilityResponseSOAP{}
-	err = soap.Decode([]byte(response), &availability)
+	err = goap.Decode([]byte(response), &availability)
 	if err != nil {
 		return false, err
 	}
@@ -91,18 +91,18 @@ func GetAllRooms(buildingID int) (AllRooms, error) {
 		Buildings: buildings,
 	}
 
-	encodedRequest, err := soap.Encode(&request)
+	encodedRequest, err := goap.Encode(&request)
 	if err != nil {
 		return AllRooms{}, err
 	}
 
-	response, err := soap.Request("https://emsweb.byu.edu/EMSAPI/Service.asmx", encodedRequest)
+	response, err := goap.Request("https://emsweb.byu.edu/EMSAPI/Service.asmx", encodedRequest)
 	if err != nil {
 		return AllRooms{}, err
 	}
 
 	allRooms := AllRoomsResponseSOAP{}
-	err = soap.Decode([]byte(response), &allRooms)
+	err = goap.Decode([]byte(response), &allRooms)
 	if err != nil {
 		return AllRooms{}, err
 	}
@@ -137,18 +137,18 @@ func GetAllBuildings() (AllBuildings, error) {
 		Password: os.Getenv("EMS_API_PASSWORD"),
 	}
 
-	encodedRequest, err := soap.Encode(&request)
+	encodedRequest, err := goap.Encode(&request)
 	if err != nil {
 		return AllBuildings{}, err
 	}
 
-	response, err := soap.Request("https://emsweb.byu.edu/EMSAPI/Service.asmx", encodedRequest)
+	response, err := goap.Request("https://emsweb.byu.edu/EMSAPI/Service.asmx", encodedRequest)
 	if err != nil {
 		return AllBuildings{}, err
 	}
 
 	allBuilding := AllBuildingsResponseSOAP{}
-	err = soap.Decode([]byte(response), &allBuilding)
+	err = goap.Decode([]byte(response), &allBuilding)
 	if err != nil {
 		return AllBuildings{}, err
 	}
